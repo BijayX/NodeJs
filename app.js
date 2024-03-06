@@ -1,5 +1,8 @@
 const app = require("express")() // alter const express =require("express") const app=express()
-
+const mongoose=require("mongoose")
+const { connectdatabase } = require("./database/database")
+// database  connection function
+connectdatabase()
 // req => request , res=> response
 app.get("/",(req,res)=>{
     // res.send("<h1>Hello I am From Home Page </h1>")
