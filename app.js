@@ -4,16 +4,17 @@ const app = require("express")() // alter const express =require("express") cons
 app.get("/",(req,res)=>{
     // res.send("<h1>Hello I am From Home Page </h1>")
     res.json({
-        message:"this from home page",
-        Status:"Success"
+        message:"Home Page",
+        status:"success"
     })
+    
 })
 
 app.get("/contact",(req,res)=>{
     // res.send("This is Contact Page")
     res.json({
         message:"This is contact Page",
-        status:"Failed",
+        status:"Success"
     })
 })
 
