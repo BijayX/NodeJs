@@ -1,5 +1,13 @@
-const app = require("express")() // alter const express =require("express") const app=express()
+const express = require("express") // alter const express =require("express") const app=express()
+const app=express();
 const mongoose=require("mongoose")
+const Blog = require ("./model/blogmodel")
+
+
+
+// nodejs lai form bata ako data lai parse gar bhneko
+app.use(express.json()) 
+app.use(express.urlencoded({extended:true}))
 const { connectdatabase } = require("./database/database")
 // database  connection function
 connectdatabase()
@@ -27,6 +35,23 @@ app.get("/about",(req,res)=>{
 
 app.get("/login",(req,res)=>{
     res.send("This is login page")
+})
+
+app.post("/createblog",async(req,res)=>{
+     const title =req.body.title;
+     const subtitle =req.body.subtitle;
+     const Description =req.body.Description
+
+
+     await Blog.create({
+       title:  title,
+       subtitle: subtitle,
+       Description : Description
+    })
+    res.json({
+        status:200,
+        message:"Blog Created Successfully!"
+    })
 })
 app.listen(3000,(req,res)=>{
     console.log("Node Js has been started");
