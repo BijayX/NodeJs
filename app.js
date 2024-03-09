@@ -48,11 +48,34 @@ app.post("/createblog",async(req,res)=>{
        subtitle: subtitle,
        Description : Description
     })
-    res.json({
-        status:200,
+    res.status(200).json({
         message:"Blog Created Successfully!"
     })
 })
+
+app.get("/blogs",async(req, res)=>{
+   const blogs= await Blog.find()
+   res.json({
+     status: "success",
+     message:"Blogs fetched successfully!",
+     data: blogs,
+   })
+})
+
+app.get("/blogs/:id", async (req , res) => {
+    const blog =await Blog.find
+    ({_id: req.params.id})
+    if(!blog){
+      return res.status(400).json({message:'No such blog found' });
+      }
+    res.status(200).json({
+        message: 'Blog details fetched successfully',
+        data: blog
+
+    })
+});
+
+// update a blog
 app.listen(3000,(req,res)=>{
     console.log("Node Js has been started");
 })
